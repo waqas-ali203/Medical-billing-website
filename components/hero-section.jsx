@@ -8,7 +8,7 @@ import { TypeAnimation } from "react-type-animation"
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-[90vh] overflow-hidden">
+    <section className="relative min-h-[90vh] overflow-hidden pt-16 md:pt-20">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image

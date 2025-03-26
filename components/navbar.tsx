@@ -1,9 +1,8 @@
 "use client"
-
-import { useState, useRef, useEffect } from "react"
-import Link from "next/link"
-import Image from "next/image"
-import { motion, AnimatePresence } from "framer-motion"
+import { useState, useRef, useEffect } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Menu,
   X,
@@ -17,17 +16,17 @@ import {
   ClipboardCheck,
   Stethoscope,
   HeartPulse,
-} from "lucide-react"
-import { Button } from "@/components/ui/button"
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export default function Navbar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isSolutionsOpen, setIsSolutionsOpen] = useState(false)
-  const dropdownRef = useRef(null)
-  const buttonRef = useRef(null)
-  const timeoutRef = useRef(null)
-  const [prevScrollPos, setPrevScrollPos] = useState(0)
-  const [visible, setVisible] = useState(true)
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSolutionsOpen, setIsSolutionsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement | null>(null); // Define specific element type or null
+  const buttonRef = useRef<HTMLButtonElement | null>(null); // Define specific element type or null
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);  // Fix type error
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
+  const [visible, setVisible] = useState(true);
 
   const solutions = [
     {
@@ -78,75 +77,75 @@ export default function Navbar() {
       description: "Tailored for specialty practices",
       link: "/solutions/specialty-billing",
     },
-  ]
+  ];
 
   // Handle click outside to close dropdown
   useEffect(() => {
-    function handleClickOutside(event) {
+    function handleClickOutside(event: MouseEvent) {
       if (
         dropdownRef.current &&
         buttonRef.current &&
-        !dropdownRef.current.contains(event.target) &&
-        !buttonRef.current.contains(event.target)
+        !dropdownRef.current.contains(event.target as Node) &&  // Type assertion
+        !buttonRef.current.contains(event.target as Node) // Type assertion
       ) {
-        setIsSolutionsOpen(false)
+        setIsSolutionsOpen(false);
       }
     }
 
-    document.addEventListener("mousedown", handleClickOutside)
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside)
-    }
-  }, [])
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   // Handle mouse enter with delay
   const handleMouseEnter = () => {
     if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current)
-      timeoutRef.current = null
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
     }
-    setIsSolutionsOpen(true)
-  }
+    setIsSolutionsOpen(true);
+  };
 
   // Handle mouse leave with delay
   const handleMouseLeave = () => {
     timeoutRef.current = setTimeout(() => {
-      setIsSolutionsOpen(false)
-    }, 300) // 300ms delay before closing
-  }
+      setIsSolutionsOpen(false);
+    }, 300); // 300ms delay before closing
+  };
 
   // Hide/show navbar when scrolling
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollPos = window.scrollY
+      const currentScrollPos = window.scrollY;
 
       // Set a threshold to determine if we should hide the navbar
       // This helps prevent the navbar from hiding when just slightly scrolling down
-      const isScrollingDown = prevScrollPos < currentScrollPos && currentScrollPos > 50
+      const isScrollingDown = prevScrollPos < currentScrollPos && currentScrollPos > 50;
 
-      setVisible(!isScrollingDown)
-      setPrevScrollPos(currentScrollPos)
-    }
+      setVisible(!isScrollingDown);
+      setPrevScrollPos(currentScrollPos);
+    };
 
-    window.addEventListener("scroll", handleScroll)
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener("scroll", handleScroll)
-    }
-  }, [prevScrollPos])
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [prevScrollPos]);
 
   return (
     <motion.nav
-      className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md"
-      initial={{ y: 0 }}
-      animate={{
-        y: visible ? 0 : -100,
-        transition: {
-          duration: 0.3,
-          ease: "easeInOut",
-        },
-      }}
-    >
+  className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md"
+  initial={{ y: 0 }}
+  animate={{
+    y: visible ? 0 : -100,
+    transition: {
+      duration: 0.3,
+      ease: "easeInOut",
+    },
+  }}
+>
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
           <motion.div
@@ -445,6 +444,5 @@ export default function Navbar() {
         </AnimatePresence>
       </div>
     </motion.nav>
-  )
-}
-
+  );
+};

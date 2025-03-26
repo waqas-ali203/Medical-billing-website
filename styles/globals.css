@@ -91,4 +91,8 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+};
+
+#herosection {
+  margin-top: 400px !important;
 }
