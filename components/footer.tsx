@@ -10,11 +10,11 @@ export default function Footer() {
           <div>
             <Link href="/" className="inline-block mb-6">
               <Image
-                src="/placeholder.svg?height=40&width=150"
+                src="/assets/utopia-logo.png"
                 alt="Medical Billing Logo"
-                width={150}
-                height={40}
-                className="h-10 w-auto"
+                width={200}
+                height={60}
+                className="h-24 w-auto"
               />
             </Link>
             <p className="text-gray-400 mb-6">
