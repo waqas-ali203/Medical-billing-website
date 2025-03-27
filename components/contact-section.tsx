@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
@@ -17,26 +16,19 @@ export default function ContactSection() {
     company: "",
     specialty: "",
     message: "",
-    services: [],
+    monthlyBilling: "",
   })
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, checked } = e.target
-    setFormData((prev) => ({
-      ...prev,
-      services: checked ? [...prev.services, value] : prev.services.filter((service) => service !== value),
-    }))
-  }
-
-  // Replace the handleSubmit function with a simpler version that just shows the success message
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
@@ -51,10 +43,18 @@ export default function ContactSection() {
         company: "",
         specialty: "",
         message: "",
-        services: [],
+        monthlyBilling: "",
       })
       setIsSubmitting(false)
     }, 1000)
+  }
+
+  const iconStyle = {
+    color: "#17918a",
+  }
+
+  const iconContainerStyle = {
+    backgroundColor: "#95f6ee",
   }
 
   return (
@@ -84,8 +84,8 @@ export default function ContactSection() {
 
             <div className="space-y-4 mt-8">
               <div className="flex items-start gap-4">
-                <div className="bg-primary/10 p-3 rounded-full">
-                  <MapPin className="h-5 w-5 text-primary" />
+                <div className="p-3 rounded-full" style={iconContainerStyle}>
+                  <MapPin className="h-5 w-5" style={iconStyle} />
                 </div>
                 <div>
                   <h4 className="font-medium">Our Location</h4>
@@ -94,8 +94,8 @@ export default function ContactSection() {
               </div>
 
               <div className="flex items-start gap-4">
-                <div className="bg-primary/10 p-3 rounded-full">
-                  <Phone className="h-5 w-5 text-primary" />
+                <div className=" p-3 rounded-full" style={iconContainerStyle}>
+                  <Phone className="h-5 w-5" style={iconStyle} />
                 </div>
                 <div>
                   <h4 className="font-medium">Phone Number</h4>
@@ -106,8 +106,8 @@ export default function ContactSection() {
               </div>
 
               <div className="flex items-start gap-4">
-                <div className="bg-primary/10 p-3 rounded-full">
-                  <Mail className="h-5 w-5 text-primary" />
+                <div className=" p-3 rounded-full" style={iconContainerStyle}>
+                  <Mail className="h-5 w-5" style={iconStyle} />
                 </div>
                 <div>
                   <h4 className="font-medium">Email Address</h4>
@@ -121,8 +121,8 @@ export default function ContactSection() {
               </div>
 
               <div className="flex items-start gap-4">
-                <div className="bg-primary/10 p-3 rounded-full">
-                  <Clock className="h-5 w-5 text-primary" />
+                <div className=" p-3 rounded-full" style={iconContainerStyle}>
+                  <Clock className="h-5 w-5" style={iconStyle} />
                 </div>
                 <div>
                   <h4 className="font-medium">Business Hours</h4>
@@ -155,7 +155,14 @@ export default function ContactSection() {
                 <p className="text-green-700 mb-4">
                   Your message has been sent successfully. We'll get back to you soon!
                 </p>
-                <Button onClick={() => setIsSubmitted(false)} variant="outline">
+                <Button
+                  onClick={() => setIsSubmitted(false)}
+                  variant="outline"
+                  style={{
+                    backgroundColor: "#17918a",
+                    color: "white",
+                  }}
+                >
                   Send Another Message
                 </Button>
               </div>
@@ -245,6 +252,26 @@ export default function ContactSection() {
                 </div>
 
                 <div className="mb-4">
+                  <label htmlFor="monthlyBilling" className="block text-sm font-medium mb-1">
+                    Monthly Billing Volume
+                  </label>
+                  <select
+                    id="monthlyBilling"
+                    name="monthlyBilling"
+                    value={formData.monthlyBilling}
+                    onChange={handleChange}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                  >
+                    <option value="">Select Billing Volume</option>
+                    <option value="1k-15k">1k - 15k</option>
+                    <option value="15k-30k">15k - 30k</option>
+                    <option value="30k-60k">30k - 60k</option>
+                    <option value="60k-100k">60k - 100k</option>
+                    <option value="above-100k">Above 100k</option>
+                  </select>
+                </div>
+
+                <div className="mb-4">
                   <label htmlFor="message" className="block text-sm font-medium mb-1">
                     Message *
                   </label>
@@ -259,38 +286,15 @@ export default function ContactSection() {
                   />
                 </div>
 
-                <div className="mb-6">
-                  <label className="block text-sm font-medium mb-2">Services of Interest (Select all that apply)</label>
-                  <div className="space-y-2">
-                    {[
-                      "Medical Coding",
-                      "Claims Processing",
-                      "Revenue Cycle Management",
-                      "Credentialing",
-                      "Compliance Services",
-                    ].map((service) => (
-                      <div key={service} className="flex items-center">
-                        <input
-                          type="checkbox"
-                          id={service.toLowerCase().replace(/\s+/g, "-")}
-                          name="services"
-                          value={service}
-                          checked={formData.services.includes(service)}
-                          onChange={handleCheckboxChange}
-                          className="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded"
-                        />
-                        <label
-                          htmlFor={service.toLowerCase().replace(/\s+/g, "-")}
-                          className="ml-2 text-sm text-gray-700"
-                        >
-                          {service}
-                        </label>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <Button type="submit" className="w-full" disabled={isSubmitting}>
+                <Button
+                  type="submit"
+                  className="w-full"
+                  disabled={isSubmitting}
+                  style={{
+                    backgroundColor: "#17918a",
+                    color: "white",
+                  }}
+                >
                   {isSubmitting ? "Sending..." : "Send Message"}
                 </Button>
               </form>
@@ -300,5 +304,4 @@ export default function ContactSection() {
       </div>
     </section>
   )
-}
-
+};

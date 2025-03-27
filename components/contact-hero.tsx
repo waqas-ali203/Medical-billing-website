@@ -5,6 +5,15 @@ import { motion } from "framer-motion"
 import { Phone, Mail, MapPin, Clock } from "lucide-react"
 
 export default function ContactHero() {
+  const cardVariants = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    whileHover: {
+      scale: 1.05,
+      backgroundColor: "rgba(255, 255, 255, 0.2)",
+    },
+  };
+
   return (
     <section className="relative overflow-hidden">
       {/* Background Image */}
@@ -56,25 +65,25 @@ export default function ContactHero() {
           >
             {[
               {
-                icon: <Phone className="h-6 w-6" />,
+                icon: <Phone className="h-6 w-6" color="white"/>,
                 title: "Call Us",
                 info: "+1 (555) 123-4567",
                 description: "Mon-Fri, 9am-5pm EST",
               },
               {
-                icon: <Mail className="h-6 w-6" />,
+                icon: <Mail className="h-6 w-6" color="white"/>,
                 title: "Email Us",
                 info: "info@medicalbilling.com",
                 description: "We respond within 24 hours",
               },
               {
-                icon: <MapPin className="h-6 w-6" />,
+                icon: <MapPin className="h-6 w-6" color="white"/>,
                 title: "Visit Us",
                 info: "123 Medical Plaza",
                 description: "New York, NY 10001",
               },
               {
-                icon: <Clock className="h-6 w-6" />,
+                icon: <Clock className="h-6 w-6" color="white"/>,
                 title: "Business Hours",
                 info: "Monday - Friday",
                 description: "9:00 AM - 5:00 PM EST",
@@ -82,14 +91,12 @@ export default function ContactHero() {
             ].map((item, index) => (
               <motion.div
                 key={index}
-                className="bg-white/10 backdrop-blur-sm rounded-lg p-6 flex flex-col items-center"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.7 + index * 0.1 }}
-                whileHover={{
-                  scale: 1.05,
-                  backgroundColor: "rgba(255, 255, 255, 0.2)",
-                }}
+                className="bg-white/10 backdrop-blur-sm rounded-lg p-6 flex flex-col items-center cursor-pointer"
+                variants={cardVariants}
+                initial="initial"
+                animate="animate"
+                whileHover="whileHover" //Added whileHover
+                transition={{ duration: 0.02, delay: 0, ease: "linear" }}
               >
                 <div className="bg-emerald/20 p-3 rounded-full mb-4">{item.icon}</div>
                 <h3 className="text-lg font-bold text-white mb-2">{item.title}</h3>
@@ -114,5 +121,4 @@ export default function ContactHero() {
       </div>
     </section>
   )
-}
-
+};

@@ -29,7 +29,7 @@ interface ServiceCardProps {
 function ServiceCard({ icon, title, description, index }: ServiceCardProps) {
   return (
     <motion.div
-      className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300"
+      className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer" // Added cursor-pointer
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -37,11 +37,12 @@ function ServiceCard({ icon, title, description, index }: ServiceCardProps) {
       whileHover={{ y: -10, backgroundColor: "#f8fafc" }}
     >
       <motion.div
-        className="bg-primary/10 p-4 rounded-full w-fit mb-4 mx-auto"
+        className="p-4 rounded-full w-fit mb-4 mx-auto" //Removed bg-primary/10 as its now dynamic
         whileHover={{ scale: 1.1, rotate: 5 }}
         transition={{ type: "spring", stiffness: 300 }}
+        style={{ backgroundColor: "#95f6ee" }} // Set background color
       >
-        <div className="text-primary">{icon}</div>
+        <div style={{ color: "#17918a" }}>{icon}</div> {/* Set icon color */}
       </motion.div>
       <h3 className="text-xl font-bold mb-2 text-center">{title}</h3>
       <p className="text-gray-600 text-center">{description}</p>
@@ -58,62 +59,62 @@ function ServiceCard({ icon, title, description, index }: ServiceCardProps) {
 export default function SpecialistSection() {
   const services = [
     {
-      icon: <FileText size={28} />,
+      icon: <FileText size={28} color="#17918a" />,  //Icon  color
       title: "Medical Coding",
       description: "Accurate coding services for all medical specialties to ensure proper reimbursement.",
     },
     {
-      icon: <ClipboardCheck size={28} />,
+      icon: <ClipboardCheck size={28} color="#17918a"/>,  //Icon  color
       title: "Claims Processing",
       description: "Efficient claims submission and follow-up to minimize rejections and denials.",
     },
     {
-      icon: <CreditCard size={28} />,
+      icon: <CreditCard size={28} color="#17918a"/>,  //Icon  color
       title: "Payment Posting",
       description: "Timely and accurate posting of payments to maintain financial records.",
     },
     {
-      icon: <BarChart4 size={28} />,
+      icon: <BarChart4 size={28} color="#17918a"/>,  //Icon  color
       title: "Revenue Analysis",
       description: "Detailed financial reporting and analysis to identify revenue opportunities.",
     },
     {
-      icon: <Shield size={28} />,
+      icon: <Shield size={28} color="#17918a"/>,  //Icon  color
       title: "Compliance Services",
       description: "Ensuring adherence to healthcare regulations and billing requirements.",
     },
     {
-      icon: <Users size={28} />,
+      icon: <Users size={28} color="#17918a"/>,  //Icon  color
       title: "Credentialing",
       description: "Provider enrollment services with insurance companies and government programs.",
     },
     {
-      icon: <Database size={28} />,
+      icon: <Database size={28} color="#17918a"/>,  //Icon  color
       title: "Practice Management",
       description: "Comprehensive solutions to streamline your practice operations.",
     },
     {
-      icon: <FileCheck size={28} />,
+      icon: <FileCheck size={28} color="#17918a"/>,  //Icon  color
       title: "Audit Support",
       description: "Expert assistance during payer audits to minimize financial impact.",
     },
     {
-      icon: <Stethoscope size={28} />,
+      icon: <Stethoscope size={28} color="#17918a"/>,  //Icon  color
       title: "Provider Education",
       description: "Training for healthcare providers on documentation best practices.",
     },
     {
-      icon: <Receipt size={28} />,
+      icon: <Receipt size={28} color="#17918a"/>,  //Icon  color
       title: "Patient Billing",
       description: "Professional handling of patient statements and payment collection.",
     },
     {
-      icon: <HeartPulse size={28} />,
+      icon: <HeartPulse size={28} color="#17918a"/>,  //Icon  color
       title: "Denial Management",
       description: "Strategic approach to reduce claim denials and increase collections.",
     },
     {
-      icon: <Phone size={28} />,
+      icon: <Phone size={28} color="#17918a"/>,  //Icon  color
       title: "24/7 Support",
       description: "Round-the-clock assistance for all your medical billing needs.",
     },
@@ -166,8 +167,12 @@ export default function SpecialistSection() {
         >
           <Button
             size="lg"
-            className="rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 shadow-lg hover:shadow-xl transition-all duration-300"
+            className="rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
             onClick={() => {}}
+            style={{
+              backgroundColor: "#17918a", // Set button background color
+              color: "white", // Set text color
+            }}
           >
             View All Services
           </Button>
@@ -175,5 +180,4 @@ export default function SpecialistSection() {
       </div>
     </section>
   )
-}
-
+};

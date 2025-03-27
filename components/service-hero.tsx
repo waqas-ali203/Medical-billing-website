@@ -69,8 +69,8 @@ export default function ServiceHero() {
               </Button>
               <Button
                 size="lg"
+                className="rounded-full border-2 border-white text-darkblue bg-white hover:text-darkblue hover:bg-transparent transition-all duration-300"
                 variant="outline"
-                className="rounded-full border-2 border-white text-white hover:bg-white/20 transition-all duration-300"
               >
                 Request a Quote <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
@@ -136,5 +136,4 @@ export default function ServiceHero() {
       </div>
     </section>
   )
-}
-
+};

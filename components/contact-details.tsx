@@ -8,14 +8,24 @@ import { MapPin, Phone, Mail, Clock, Globe, Users } from "lucide-react"
 interface ContactCardProps {
   icon: React.ReactNode
   title: string
-  details: string[]
+  details: React.ReactNode[] //Modified details prop type
   index: number
 }
 
 function ContactCard({ icon, title, details, index }: ContactCardProps) {
+  const cardVariants = {
+    initial: { opacity: 0, y: 30 },
+    whileInView: { opacity: 1, y: 0 },
+    whileHover: {
+      scale: 1.03,
+      boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+      borderColor: "#e9dfd4",
+    },
+  }
+
   return (
     <motion.div
-      className="bg-white rounded-xl shadow-lg p-6 border-2 border-transparent"
+      className="bg-white rounded-xl shadow-lg p-6 border-2 border-transparent cursor-pointer"
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -24,11 +34,12 @@ function ContactCard({ icon, title, details, index }: ContactCardProps) {
         scale: 1.03,
         boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
         borderColor: "#e9dfd4",
+        transition: { duration: 0.1 }, // Immediate transition on hover
       }}
     >
       <div className="flex items-start gap-4">
-        <div className="bg-[#f0ebe4] p-3 rounded-full mt-1">
-          <div className="text-[#735739]">{icon}</div>
+        <div className="p-3 rounded-full" style={{ backgroundColor: "#95f6ee" }}>
+          <div style={{ color: "#17918a" }}>{icon}</div>
         </div>
 
         <div>
@@ -49,12 +60,12 @@ function ContactCard({ icon, title, details, index }: ContactCardProps) {
 export default function ContactDetails() {
   const contactInfo = [
     {
-      icon: <MapPin size={24} />,
+      icon: <MapPin size={24} color="#17918a" />,
       title: "Our Location",
-      details: ["123 Medical Plaza, Suite 456", "Healthcare City, USA", "United States"],
+      details: ["106 Tudor Court", "Springfield, NJ 07081", "United States"], //Changed Address
     },
     {
-      icon: <Phone size={24} />,
+      icon: <Phone size={24} color="#17918a" />,
       title: "Phone Numbers",
       details: [
         <a key="phone" href="tel:+923186264059" className="hover:text-[#735739] transition-colors">
@@ -65,7 +76,7 @@ export default function ContactDetails() {
       ],
     },
     {
-      icon: <Mail size={24} />,
+      icon: <Mail size={24} color="#17918a" />,
       title: "Email Addresses",
       details: [
         <a key="email" href="mailto:waqasansari4547@gmail.com" className="hover:text-[#735739] transition-colors">
@@ -76,17 +87,17 @@ export default function ContactDetails() {
       ],
     },
     {
-      icon: <Clock size={24} />,
+      icon: <Clock size={24} color="#17918a" />,
       title: "Business Hours",
       details: ["Monday - Friday: 8:00 AM - 6:00 PM", "Saturday: 9:00 AM - 1:00 PM", "Sunday: Closed"],
     },
     {
-      icon: <Globe size={24} />,
+      icon: <Globe size={24} color="#17918a" />,
       title: "Service Areas",
       details: ["All 50 States", "Remote Services Available", "International Clients Welcome"],
     },
     {
-      icon: <Users size={24} />,
+      icon: <Users size={24} color="#17918a" />,
       title: "Department Contacts",
       details: [
         <a key="sales" href="mailto:waqasansari4547@gmail.com" className="hover:text-[#735739] transition-colors">
@@ -117,7 +128,8 @@ export default function ContactDetails() {
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="inline-block px-4 py-1 bg-[#f0ebe4] text-[#735739] rounded-full text-sm font-medium mb-4"
+            className="inline-block px-4 py-1 rounded-full text-sm font-medium mb-4 bg-blue-100 text-blue-800"
+          
           >
             Contact Information
           </motion.div>
@@ -138,5 +150,4 @@ export default function ContactDetails() {
       </div>
     </section>
   )
-}
-
+};

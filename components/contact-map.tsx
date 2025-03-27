@@ -1,8 +1,9 @@
 "use client"
 
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { MapPin, Navigation } from "lucide-react"
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { MapPin, Navigation } from "lucide-react";
 
 export default function ContactMap() {
   return (
@@ -20,7 +21,7 @@ export default function ContactMap() {
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="inline-block px-4 py-1 bg-[#f0ebe4] text-[#735739] rounded-full text-sm font-medium mb-4"
+            className="inline-block px-4 py-1 rounded-full text-sm font-medium mb-4 bg-blue-100 text-blue-800"
           >
             Our Location
           </motion.div>
@@ -61,23 +62,23 @@ export default function ContactMap() {
             viewport={{ once: true }}
           >
             <div className="flex items-start gap-4 mb-6">
-              <div className="bg-[#f0ebe4] p-3 rounded-full">
-                <MapPin className="h-6 w-6 text-[#735739]" />
+              <div className="p-3 rounded-full" style={{ backgroundColor: "#95f6ee" }}>
+                <MapPin className="h-4 w-6" style={{ color: "#17918a" }} />
               </div>
 
               <div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2">Office Address</h3>
                 <p className="text-gray-600">
-                  123 Medical Plaza, Suite 456
+                  106 Tudor Court, Springfield, NJ 07081 //Added new Address
                   <br />
-                  Healthcare City, USA
+                  United States
                 </p>
               </div>
             </div>
 
             <div className="space-y-4 mb-8">
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-[#735739] rounded-full"></div>
+                <div className="w-2 h-2 rounded-full" style={{ backgroundColor: "#735739" }}></div>
                 <span className="text-sm text-gray-600">
                   Email:{" "}
                   <a href="mailto:waqasansari4547@gmail.com" className="text-[#735739] hover:underline">
@@ -87,7 +88,7 @@ export default function ContactMap() {
               </div>
 
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-[#735739] rounded-full"></div>
+                <div className="w-2 h-2 rounded-full" style={{ backgroundColor: "#735739" }}></div>
                 <span className="text-sm text-gray-600">
                   Phone:{" "}
                   <a href="tel:+923186264059" className="text-[#735739] hover:underline">
@@ -97,15 +98,20 @@ export default function ContactMap() {
               </div>
 
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-[#735739] rounded-full"></div>
+                <div className="w-2 h-2 rounded-full" style={{ backgroundColor: "#735739" }}></div>
                 <span className="text-sm text-gray-600">Accessible by public transportation</span>
               </div>
             </div>
 
             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
               <Button
-                className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-[#735739] to-[#8a6a45] hover:from-[#5d472e] hover:to-[#735739]"
+                className="w-full flex items-center justify-center gap-2"
                 onClick={() => window.open("https://maps.google.com/?q=USA", "_blank")}
+                style={{
+                  backgroundColor: "#17918a",
+                  color: "white",
+                  boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)"
+                }} // Styled same as buttons you desined
               >
                 <Navigation className="h-4 w-4" />
                 <span>Get Directions</span>
@@ -116,5 +122,4 @@ export default function ContactMap() {
       </div>
     </section>
   )
-}
-
+};

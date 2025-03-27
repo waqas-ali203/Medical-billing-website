@@ -7,34 +7,34 @@ import { CheckCircle, Award, Clock, Shield, BarChart4, Users } from "lucide-reac
 export default function ChooseUsSection() {
   const reasons = [
     {
-      icon: <Award className="h-8 w-8 text-teal" />,
+      icon: <Award className="h-12 w-12 text-teal" />, // Increased icon size
       title: "Specialized Medical Billing Expertise",
       description:
         "Our team consists of certified medical billing specialists with expertise across various healthcare specialties.",
     },
     {
-      icon: <BarChart4 className="h-8 w-8 text-emerald" />,
+      icon: <BarChart4 className="h-12 w-12 text-emerald" />, // Increased icon size
       title: "Increased Revenue Collection",
       description:
         "Our proven processes help healthcare providers collect more of what they're owed, faster and with less hassle.",
     },
     {
-      icon: <Clock className="h-8 w-8 text-lightblue" />,
+      icon: <Clock className="h-12 w-12 text-lightblue" />, // Increased icon size
       title: "Reduced Administrative Burden",
       description: "We handle the complex billing tasks so your staff can focus on providing quality patient care.",
     },
     {
-      icon: <Shield className="h-8 w-8 text-orange" />,
+      icon: <Shield className="h-12 w-12 text-orange" />, // Increased icon size
       title: "Compliance Assurance",
       description: "We stay up-to-date with changing regulations to ensure your billing practices remain compliant.",
     },
     {
-      icon: <BarChart4 className="h-8 w-8 text-darkblue" />,
+      icon: <BarChart4 className="h-12 w-12 text-darkblue" />, // Increased icon size
       title: "Transparent Reporting",
       description: "Access real-time reports and analytics to track your practice's financial performance.",
     },
     {
-      icon: <Users className="h-8 w-8 text-orange" />,
+      icon: <Users className="h-12 w-12 text-orange" />, // Increased icon size
       title: "Dedicated Support Team",
       description: "Our responsive customer service team is always available to address your questions and concerns.",
     },
@@ -55,7 +55,7 @@ export default function ChooseUsSection() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5 },
+      transition: { duration: 0.3 }, //Shorter transition
     },
   }
 
@@ -107,9 +107,9 @@ export default function ChooseUsSection() {
             {reasons.map((reason, index) => (
               <motion.div
                 key={index}
-                className="bg-softgray p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow border-l-4 border-teal"
+                className="bg-softgray p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow border-l-4 border-teal cursor-pointer" //Added cursor-pointer
                 variants={itemVariants}
-                whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                whileHover={{ y: -5, transition: { duration: 0.1 } }} // Faster hover animation
               >
                 <div className="flex items-start gap-3">
                   <div className="mt-1">{reason.icon}</div>
@@ -164,5 +164,4 @@ export default function ChooseUsSection() {
       </div>
     </section>
   )
-}
-
+};

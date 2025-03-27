@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react"
 import Image from "next/image"
-import { ChevronLeft, ChevronRight, CheckCircle } from "lucide-react"
+import { CheckCircle } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 
 interface SlideProps {
@@ -93,7 +93,7 @@ export default function CarouselSection() {
         </motion.div>
 
         <div className="carousel-container">
-          <div className="relative max-w-5xl mx-auto overflow-hidden">
+          <div className="relative max-w-6xl mx-auto overflow-hidden">
             <AnimatePresence initial={false} custom={direction} mode="wait">
               <motion.div
                 key={currentIndex}
@@ -185,25 +185,7 @@ export default function CarouselSection() {
               </motion.div>
             </AnimatePresence>
 
-            <motion.button
-              onClick={prevSlide}
-              className="absolute left-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-0 bg-white p-2 rounded-full shadow-lg z-10"
-              aria-label="Previous slide"
-              whileHover={{ scale: 1.1, backgroundColor: "#f8fafc" }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <ChevronLeft className="h-6 w-6 text-gray-700" />
-            </motion.button>
-
-            <motion.button
-              onClick={nextSlide}
-              className="absolute right-0 top-1/2 -translate-y-1/2 -translate-x-2 md:translate-x-0 bg-white p-2 rounded-full shadow-lg z-10"
-              aria-label="Next slide"
-              whileHover={{ scale: 1.1, backgroundColor: "#f8fafc" }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <ChevronRight className="h-6 w-6 text-gray-700" />
-            </motion.button>
+            {/* Removed previous and next buttons */}
 
             <div className="flex justify-center mt-6 space-x-2">
               {slides.map((_, index) => (
@@ -225,5 +207,4 @@ export default function CarouselSection() {
       </div>
     </section>
   )
-}
-
+};
